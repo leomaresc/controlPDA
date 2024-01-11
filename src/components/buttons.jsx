@@ -1,18 +1,15 @@
 import react from "react";
 import {
-    StyleSheet,
-    Button,
     View,
-    SafeAreaView,
-    Text,
-    Alert,
   } from 'react-native';
   import Add from "./add";
   import Remove from "./remove";
+  import Export from "./export";
 
   const Buttons = () => {
     return (
-        <View style={{flex: 0, flexDirection: "row", justifyContent: "flex-start", margin: "10%"}}>
+        <View style={{flex: 0, flexDirection: "column", justifyContent: "flex-start", margin: "10%"}}>
+            <Export />
             <Add />
             <Remove />
         </View>
