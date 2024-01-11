@@ -2,14 +2,14 @@
   "expo": {
     "name": "controlPDA",
     "slug": "controlPDA",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splash.jpg",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#A4B9DB"
     },
     "assetBundlePatterns": [
       "**/*"
