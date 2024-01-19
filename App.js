@@ -49,7 +49,7 @@ export default function App() {
   }
 
   return (
-    <View
+    <View className="home"
       style={{ flex: 5,flexDirection: "column", alignItems: 'center', justifyContent: 'space-between', backgroundColor: "#A4B9DB"}}
       onLayout={onLayoutRootView}>
       <View style={{borderColor: "black", borderWidth: 3, marginTop: "15%", marginRight: "30%"}}>

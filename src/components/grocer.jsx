@@ -46,7 +46,7 @@ const Grocer = props => {
             <Pressable style={styles.buttonAdd} title="+" onPress={() => {
                 setCount(count + 1);
                 test[props.index].name = props.name;
-                test[props.index].counter = count;
+                test[props.index].counter = count+1;
                 console.log(test)
                 }}>
                 <Text style={styles.text}>+</Text>
@@ -54,7 +54,7 @@ const Grocer = props => {
             <Pressable style={styles.buttonRm} title="-" onPress={() => {
                 setCount(count - 1)
                 test[props.index].name = props.name;
-                test[props.index].counter = count;
+                test[props.index].counter = count-1;
                 console.log(test)
                 }}>
                 <Text style={styles.text}>-</Text>
