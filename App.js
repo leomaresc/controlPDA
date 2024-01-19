@@ -53,11 +53,10 @@ export default function App() {
       style={{ flex: 5,flexDirection: "column", alignItems: 'center', justifyContent: 'space-between', backgroundColor: "#A4B9DB"}}
       onLayout={onLayoutRootView}>
       <View style={{borderColor: "black", borderWidth: 3, marginTop: "15%", marginRight: "30%"}}>
-        {grocers.map((x) => {
-          return <Grocer key={x.key} name={x.name} />
+        {grocers.map((x, index) => {
+          return <Grocer key={x.key} index={index} name={x.name} />
         })}
       </View>
-      
       <Buttons />
     </View>
   );

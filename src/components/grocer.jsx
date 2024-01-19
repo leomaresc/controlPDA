@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { View, Button, Text, StyleSheet, Pressable } from "react-native";
+import grocers from "../../grocers";
 
 const styles = StyleSheet.create ({
     view: {
@@ -33,6 +34,7 @@ const styles = StyleSheet.create ({
         color: "white"
     }
 });
+const test = grocers;
 
 const Grocer = props => {
     const [count, setCount] = useState(0);
@@ -41,14 +43,25 @@ const Grocer = props => {
         <View style={styles.view}>
             <Text style={styles.text}>{props.name}</Text>
             <Text style={styles.text}>{count}</Text>
-            <Pressable style={styles.buttonAdd} title="+" onPress={() => {setCount(count + 1)}}>
+            <Pressable style={styles.buttonAdd} title="+" onPress={() => {
+                setCount(count + 1);
+                test[props.index].name = props.name;
+                test[props.index].counter = count;
+                console.log(test)
+                }}>
                 <Text style={styles.text}>+</Text>
             </Pressable>
-            <Pressable style={styles.buttonRm} title="+" onPress={() => {setCount(count - 1)}}>
+            <Pressable style={styles.buttonRm} title="-" onPress={() => {
+                setCount(count - 1)
+                test[props.index].name = props.name;
+                test[props.index].counter = count;
+                console.log(test)
+                }}>
                 <Text style={styles.text}>-</Text>
             </Pressable>
         </View>
     );
 };
 
+export {test}
 export default Grocer;
