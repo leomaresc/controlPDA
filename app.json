@@ -1,5 +1,6 @@
 {
   "expo": {
+    "entryPoint": "./app/App.js",
     "name": "controlPDA",
     "slug": "controlPDA",
     "version": "0.0.1",
@@ -31,6 +32,9 @@
       "eas": {
         "projectId": "c9ccbaf1-49f5-4110-839c-fe77f400959e"
       }
-    }
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }

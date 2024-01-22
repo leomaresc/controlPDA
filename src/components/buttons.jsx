@@ -8,7 +8,7 @@ import {
 
   const Buttons = () => {
     return (
-        <View style={{flex: 0, flexDirection: "column", justifyContent: "flex-start", margin: "10%"}}>
+        <View style={{display: "flex", flexDirection: "row", flexWrap: "wrap"}}>
             <Export />
             <Add />
             <Remove />

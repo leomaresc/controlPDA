@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { View, Button, Text, StyleSheet, Pressable } from "react-native";
 import grocers from "../../grocers";
+import { useNavigation } from '@react-navigation/native';
 
 const styles = StyleSheet.create ({
     view: {
         alignSelf: "flex-start",
         flex: 0,
         flexDirection: "row",
-        margin: "5%"
+        margin: "5%",
+        marginLeft: "10%"
     },
     buttonAdd: {
         alignItems: 'center',
@@ -38,26 +40,17 @@ const test = grocers;
 
 const Grocer = props => {
     const [count, setCount] = useState(0);
+    const navigation = useNavigation();
     
     return(
         <View style={styles.view}>
             <Text style={styles.text}>{props.name}</Text>
             <Text style={styles.text}>{count}</Text>
-            <Pressable style={styles.buttonAdd} title="+" onPress={() => {
-                setCount(count + 1);
-                test[props.index].name = props.name;
-                test[props.index].counter = count+1;
-                console.log(test)
-                }}>
-                <Text style={styles.text}>+</Text>
+            <Pressable style={styles.buttonAdd} title="addError" onPress={() => {navigation.navigate(Error)}}>
+                <Text style={styles.text}>Agregar error</Text>
             </Pressable>
-            <Pressable style={styles.buttonRm} title="-" onPress={() => {
-                setCount(count - 1)
-                test[props.index].name = props.name;
-                test[props.index].counter = count-1;
-                console.log(test)
-                }}>
-                <Text style={styles.text}>-</Text>
+            <Pressable style={styles.buttonRm} title="errors" onPress={() => {console.log("hi")}}>
+                <Text style={styles.text}>Ver errores</Text>
             </Pressable>
         </View>
     );

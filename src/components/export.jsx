@@ -20,7 +20,7 @@ const Export = () =>{
 
     return(
         <View style={{margin: "3%"}}>
-            <Button title="Exportar datos" color="orange" onPress={() => {
+            <Button title="Exportar datos" color="blue" onPress={() => {
                 setCopiedText(data)
                 copyToClipboard()
             }}/>
