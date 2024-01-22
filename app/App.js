@@ -18,5 +18,3 @@ export default function App() {
     </View>
   );
 }
-
-export {Stack};
