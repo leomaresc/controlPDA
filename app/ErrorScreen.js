@@ -13,7 +13,7 @@ export default function ErrorScreen({ route, navigation }){
     let selectedDate = getCurrentDate()
 
     useEffect(() => {
-        fetch(`http://192.168.1.89:3000/getErrorsByDate?fecha=${selectedDate}`)
+        fetch(`http://10.101.46.136:3000/getErrorsByDate?fecha=${selectedDate}`)
           .then((resp) => resp.json())
           .then((json) => setData(json))
           .catch((error) => console.error(error))
