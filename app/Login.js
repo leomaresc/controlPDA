@@ -1,25 +1,27 @@
 import { Text, View, TextInput, Button, Alert } from "react-native"
-import { useEffect, useState } from "react";
+import { useEffect, useState, createContext } from "react";
 import { useForm, Controller } from "react-hook-form"
 import { useNavigation } from '@react-navigation/native';
 
 export default function Login() {
 
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const navigation = useNavigation();
 
     const {
         control,
         handleSubmit,
         formState: { errors },
+        getValues,
       } = useForm({
         defaultValues: {
-          firstName: "",
-          lastName: "",
+          username: "",
+          password: "",
         },
       })
-
-      const onSubmit = (data) => console.log(data)
     
+    const onSubmit = (data) => console.log(data)
+
     return (
         <View style={{flex: 1, flexDirection: "column", alignContent: "center"}}>
             <View style={{flex: 0, height: "20%", justifyContent: "space-around"}}>
@@ -33,13 +35,13 @@ export default function Login() {
                 }}
                 render={({ field: { onChange, onBlur, value } }) => (
                     <TextInput style={{borderWidth: 1, borderColor: "black", width: "70%"}}
-                        placeholder="First name"
+                        placeholder="Nombre de usuario"
                         onBlur={onBlur}
                         onChangeText={onChange}
                         value={value}
                     />
                 )}
-                name="firstName"
+                name="username"
             />
             </View>
 
@@ -54,13 +56,13 @@ export default function Login() {
                 }}
                 render={({ field: { onChange, onBlur, value } }) => (
                     <TextInput style={{borderWidth: 1, borderColor: "black", width: "70%"}}
-                        placeholder="Last name"
+                        placeholder="Contraseña"
                         onBlur={onBlur}
                         onChangeText={onChange}
                         value={value}
                     />
                 )}
-                name="lastName"
+                name="password"
             />
             </View>
 
@@ -70,6 +72,28 @@ export default function Login() {
                 <Button color={"orange"} title="Registrarse" onPress={() => navigation.navigate('Register')} />
                 <Button color={"green"} title="Iniciar sesión" onPress={()=> {
                     handleSubmit(onSubmit)
+                    fetch(`http://10.101.46.136:3000/login`, {
+                        method: 'POST',
+                        headers: {
+                            Accept: 'application/json',
+                            'Content-type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            username: getValues("username"),
+                            password: getValues("password")
+                        }),
+                    })
+                    .then(response => response.json())
+                    .then(json => {
+                        if(json = true){
+                            setIsLoggedIn(true)
+                        } else{
+                            console.log("A donde tú vas")
+                        }
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
                 }} />
             </View>
         </View>
