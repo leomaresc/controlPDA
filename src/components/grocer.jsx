@@ -40,14 +40,15 @@ const styles = StyleSheet.create ({
 });
 const test = grocers;
 
+
+
 const Grocer = props => {
-    const [count, setCount] = useState(0);
     const navigation = useNavigation();
     
     return(
         <View style={styles.view}>
             <Text style={styles.text}>{props.name}</Text>
-            <Text style={styles.text}>{count}</Text>
+            <Text style={styles.text}>{null}</Text>
             <Button text="+" textColor="white" buttonColor="blue" width="70%" height="30" buttonFunction={() => {navigation.navigate('AddError', {name: props.name})}}/>
             <Button text="👁" textColor="black" buttonColor="yellow" width="80%" height="30" buttonFunction={() => navigation.navigate('ErrorScreen', {name: props.name})}/>
         </View>

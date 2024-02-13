@@ -2,11 +2,21 @@ import { Text, View, TextInput, Button, Alert } from "react-native"
 import { useEffect, useState, createContext } from "react";
 import { useForm, Controller } from "react-hook-form"
 import { useNavigation } from '@react-navigation/native';
+import App from "./App";
 
-export default function Login() {
+let currentUser;
+export { currentUser }
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+export default function Login({ updateLoggedInStatus }) {
+
     const navigation = useNavigation();
+
+    const handleLogin = () => {
+        currentUser = getValues("username")
+        console.log(currentUser)
+        updateLoggedInStatus(true); // Esto actualizará el estado en App.js
+        navigation.navigate('Home');
+      };
 
     const {
         control,
@@ -86,7 +96,7 @@ export default function Login() {
                     .then(response => response.json())
                     .then(json => {
                         if(json = true){
-                            setIsLoggedIn(true)
+                            handleLogin();
                         } else{
                             console.log("A donde tú vas")
                         }

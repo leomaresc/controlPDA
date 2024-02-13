@@ -1,15 +1,22 @@
 import { NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'; 'expo-router/build/fork/getPathFromState';
-import { isLoggedIn } from './Login';
+import Login from './Login';
 import Home from './Home';
 import AddError from './AddError';
 import ErrorScreen from './ErrorScreen';
-import Login from './Login';
-import Register from './Register'
+import Register from './Register';
 import { useContext, useState } from 'react';
 
 const Stack = createNativeStackNavigator();
 export default function App() {
+
+  const [isLoggedIn, setLoggedIn] = useState(false);
+
+  const updateLoggedInStatus = (status) => {
+    setLoggedIn(status);
+  };
+  
+  
 
   return (
 
@@ -23,7 +30,9 @@ export default function App() {
         </Stack.Group>
         ) : (
         <Stack.Group>
-          <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Login">
+              {(props) => <Login {...props} updateLoggedInStatus={updateLoggedInStatus} />}
+            </Stack.Screen>
           <Stack.Screen name="Register" component={Register} />
         </Stack.Group>
         )}

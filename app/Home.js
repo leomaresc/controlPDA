@@ -5,6 +5,7 @@ import grocers from "../grocers"
 
 export default function Home({route, navigate}){
 
+
     return (
         <View className="home" style={{ flex: 5,flexDirection: "column", alignItems: 'center', justifyContent: 'space-between', backgroundColor: "#A4B9DB"}}>
             <View style={{marginTop: "10%"}}>

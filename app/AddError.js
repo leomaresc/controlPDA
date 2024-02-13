@@ -4,8 +4,11 @@ import { SelectList } from 'react-native-dropdown-select-list';
 import { rutasLista, categorias, error } from '../rutas';
 import Button from '../src/components/Button';
 import { useNavigation } from '@react-navigation/native';
+import { currentUser } from './Login';
+import getCurrentDate from '../utils/getCurrentDate';
 
 export default function AddError({route, navigate}){
+    console.log("El usuario: " + currentUser + " está agregando un error.")
 
     const navigation = useNavigation();
     const [ user ] = [route.params]
@@ -51,6 +54,33 @@ export default function AddError({route, navigate}){
             <Button text="Aceptar" textColor="#ffffff" buttonColor="#8CBED6" width="100%" height="100%" buttonFunction={()=> {
                 console.log(mistake)
                 Alert.alert('Exito!', 'Los datos han sido cargados con exito.')
+                fetch(`http://10.101.46.136:3000/postError`, {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        fecha: getCurrentDate(),
+                        supervisor: currentUser,
+                        ruta: mistake.ruta,
+                        nombre: mistake.nombre,
+                        categoria: mistake.categoria,
+                        error: mistake.error,
+                        observacion: mistake.observaciones,
+                    }),
+                })
+                .then(response => response.json())
+                .then(json => {
+                    if(json = true){
+                        console.log("Listo rey")
+                    } else{
+                        console.log("A donde tú vas")
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                });
                 navigation.navigate('Home')
             }}/>
         </View>
