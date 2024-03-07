@@ -9,7 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 
     return (
         <View style={{display: "flex", flexDirection: "row", flexWrap: "wrap", marginBottom: 20}}>
-            <Button text="Ver todos los errores" textColor="black" buttonColor="yellow" width="140" height="30" buttonFunction={() => navigation.navigate('ErrorScreen', {name: "Todos los bodegueros"})}/>
+            <Button text="Ver todos los errores" textColor="black" buttonColor="#59D5E0" width="140" height="30" buttonFunction={() => navigation.navigate('ErrorScreen', {name: "Todos los bodegueros"})}/>
         </View>
     );
   };
