@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import { useEffect, useState } from 'react';
 import Button from '../src/components/Button'
 import { Calendar } from 'react-native-calendars';
@@ -9,8 +9,7 @@ export default function ErrorScreen({ route, navigation }){
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [calendarShow, setCalendarShow] = useState(false)
-    const [selected, setSelected] = useState('');
-    const [selectedDate, setSelectedDate] = useState(getCurrentDate())
+    const [selected, setSelected] = useState(getCurrentDate());
 
     const styles = StyleSheet.create ({
         error: {
@@ -20,7 +19,7 @@ export default function ErrorScreen({ route, navigation }){
             flex: 0,
             flexDirection: "row",
             borderRadius: 10,
-            backgroundColor: "#FFFFF5",
+            backgroundColor: "#ffd8d8",
             shadowColor: "#000",
             shadowOffset: {
                 width: 0,
@@ -30,11 +29,23 @@ export default function ErrorScreen({ route, navigation }){
             shadowRadius: 2.22,
             elevation: 3,
             alignItems: "center"
-        }
+        }, 
+        ruta: {
+            width: "10%",
+            marginRight: 10,
+            marginLeft: 10,
+        },
+        nombre: {
+            width: "30%"
+        },
+        supervisor: {
+            width: "60%",
+            marginLeft: 90
+        },
     })
 
     const updateData = () => {
-        fetch(`http://10.101.46.136:3000/getErrorsByDate?fecha=${selectedDate}`)
+        fetch(`http://10.101.46.136:3000/getErrorsByDate?fecha=${selected}`)
             .then((resp) => resp.json())
             .then((json) => setData(json))
             .catch((error) => console.error(error))
@@ -54,9 +65,8 @@ export default function ErrorScreen({ route, navigation }){
         return (
             <Calendar style={{alignSelf: "center", width: 300}} onDayPress={day => {
                 setSelected(day.dateString)
-                setSelectedDate(selected)
-                setCalendarShow(false)
                 updateData();
+                setCalendarShow(false)
             }}/>
         )
         }
@@ -72,19 +82,35 @@ export default function ErrorScreen({ route, navigation }){
             {data.map((x) => {
                 if(x.nombre === user.name){
                     return (
-                        <View style={styles.error}>
-                            <Text>{x.nombre}</Text>
-                            <Text>{x.ruta}</Text>
-                            <Text>{x.supervisor}</Text>
-                        </View>
+                        <TouchableHighlight onPress={()=> {
+                            if(x.observacion != ""){
+                                alert(x.observacion)
+                            } else{
+                                alert("Sin observaciones.")
+                            }
+                        }}>
+                            <View style={styles.error} onTouchStart={console.log("hello")}>
+                                <Text style={styles.ruta}>{x.ruta}</Text>
+                                <Text style={styles.nombre}>{x.nombre}</Text>
+                                <Text style={styles.supervisor}>{x.supervisor}</Text>
+                            </View>
+                        </TouchableHighlight>
                     )
                 } else if(user.name === "Todos los bodegueros"){
                     return (
-                        <View style={styles.error}>
-                            <Text>{x.nombre}</Text>
-                            <Text>{x.ruta}</Text>
-                            <Text>{x.supervisor}</Text>
-                        </View>
+                        <TouchableHighlight onPress={()=> {
+                            if(x.observacion != ""){
+                                alert(x.observacion)
+                            } else{
+                                alert("Sin observaciones.")
+                            }
+                        }}>
+                            <View style={styles.error}>
+                                <Text style={styles.ruta}>{x.ruta}</Text>
+                                <Text style={styles.nombre}>{x.nombre}</Text>
+                                <Text style={styles.supervisor}>{x.supervisor}</Text>
+                            </View>
+                        </TouchableHighlight>
                     )
                 }
             })}
