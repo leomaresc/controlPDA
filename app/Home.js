@@ -22,19 +22,17 @@ export default function Home({route, navigate}){
         updateData();
       }, []);
 
-    const grocersErrors = () => {
-        let result;
-        grocers.map(x => {
-           data.forEach()
-        })
+    function counter(name){
+        let result = data.filter( x => x.nombre === name);
+        return result.length;
     }
 
-    return (
 
+    return (
         <View className="home" style={{ flex: 5,flexDirection: "column", alignItems: 'center', justifyContent: 'space-between', backgroundColor: "#A4B9DB"}}>
             <View style={{marginTop: "10%"}}>
             {grocers.map((x, index) => {
-                return <Grocer counter={0} key={x.key} index={index} name={x.name} />
+                return <Grocer counter={counter(x.name)} key={x.key} index={index} name={x.name} />
             })}
             </View>
             <Buttons />
