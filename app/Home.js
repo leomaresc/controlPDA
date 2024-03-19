@@ -1,5 +1,6 @@
 import { View, Text} from "react-native"
 import { useState, useEffect } from "react"
+import { useIsFocused } from "@react-navigation/native";
 import Buttons from "../src/components/buttons"
 import Grocer from "../src/components/grocer"
 import grocers from "../grocers"
@@ -7,8 +8,11 @@ import getCurrentDate from "../utils/getCurrentDate"
 
 export default function Home({route, navigate}){
 
+
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const isFocused = useIsFocused();
 
     const updateData = () => {
         fetch(`http://10.101.46.136:3000/getErrorsByDate?fecha=${getCurrentDate()}`)
@@ -18,9 +22,14 @@ export default function Home({route, navigate}){
             .finally(() => setLoading(false));
     }
 
+
     useEffect(() => {
-        updateData();
-      }, []);
+        console.log("called")
+        // Call only when screen open or when back on screen 
+        if(isFocused){ 
+            updateData();
+        }
+    }, [ isFocused]);
 
     function counter(name){
         let result = data.filter( x => x.nombre === name);

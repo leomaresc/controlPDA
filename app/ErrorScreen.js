@@ -1,8 +1,10 @@
-import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import { Alert, ScrollView, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import { useEffect, useState } from 'react';
 import Button from '../src/components/Button'
 import { Calendar } from 'react-native-calendars';
-import getCurrentDate from '../utils/getCurrentDate';  
+import getCurrentDate from '../utils/getCurrentDate';
+
+// TODO: Agregar opción de borrar un error. Creo que hay que crear un nuevo endpoint con la api que permita borrar según el ID (El id se recibe por cada elemento de error creado.)
 
 export default function ErrorScreen({ route, navigation }){
 
@@ -10,6 +12,7 @@ export default function ErrorScreen({ route, navigation }){
     const [loading, setLoading] = useState(true);
     const [calendarShow, setCalendarShow] = useState(false)
     const [selected, setSelected] = useState(getCurrentDate());
+
 
     const styles = StyleSheet.create ({
         error: {
@@ -52,11 +55,13 @@ export default function ErrorScreen({ route, navigation }){
             .finally(() => setLoading(false));
     }
 
-    useEffect(() => {
-        updateData();
-      }, []);
-
     const [ user ] = [route.params]
+
+
+      useEffect(() => {
+        updateData();
+      }, [selected]);
+
 
     function showCalendar(show){
         if(!show){
@@ -64,8 +69,7 @@ export default function ErrorScreen({ route, navigation }){
         }else{
         return (
             <Calendar style={{alignSelf: "center", width: 300}} onDayPress={day => {
-                setSelected(day.dateString)
-                updateData();
+                setSelected(day.dateString);
                 setCalendarShow(false)
             }}/>
         )
@@ -79,6 +83,7 @@ export default function ErrorScreen({ route, navigation }){
             }}/>
             {showCalendar(calendarShow)}
             <Text>Errores de: {user.name}</Text>
+            <ScrollView style={{ width: "90%", height: "90%"}}>
             {data.map((x) => {
                 if(x.nombre === user.name){
                     return (
@@ -88,8 +93,30 @@ export default function ErrorScreen({ route, navigation }){
                             } else{
                                 alert("Sin observaciones.")
                             }
-                        }}>
-                            <View style={styles.error} onTouchStart={console.log("hello")}>
+                        }} onLongPress={() => {
+                            Alert.alert(
+                                'Borrar error',
+                                '¿Seguro que desea borrar este error?',
+                                [
+                                    {
+                                        text: 'Cancelar',
+                                        onPress: () => {
+                                            console.log("Cancelar")
+                                        },
+                                        style: "cancel",
+                                    },
+                                    {
+                                        text: 'Aceptar',
+                                        onPress: () => {
+                                            console.log(x.id)
+                                        },
+                                        style: "default",
+                                    }
+                                ]
+                            )
+                        }
+                        }>
+                            <View style={styles.error}>
                                 <Text style={styles.ruta}>{x.ruta}</Text>
                                 <Text style={styles.nombre}>{x.nombre}</Text>
                                 <Text style={styles.supervisor}>{x.supervisor}</Text>
@@ -114,6 +141,7 @@ export default function ErrorScreen({ route, navigation }){
                     )
                 }
             })}
+            </ScrollView>
         </View>
     )
 }
