@@ -54,7 +54,7 @@ export default function AddError({route, navigate}){
             <Button text="Aceptar" textColor="#ffffff" buttonColor="#8CBED6" width="100%" height="100%" buttonFunction={()=> {
                 console.log(mistake)
                 Alert.alert('Exito!', 'Los datos han sido cargados con exito.')
-                fetch(`http://10.101.46.136:3000/postError`, {
+                fetch(`https://calm-scarcely-hedgehog.ngrok-free.app/postError`, {
                     method: 'POST',
                     headers: {
                         Accept: 'application/json',

@@ -15,7 +15,7 @@ export default function Home({route, navigate}){
     const isFocused = useIsFocused();
 
     const updateData = () => {
-        fetch(`http://10.101.46.136:3000/getErrorsByDate?fecha=${getCurrentDate()}`)
+        fetch(`https://calm-scarcely-hedgehog.ngrok-free.app/getErrorsByDate?fecha=${getCurrentDate()}`)
             .then((resp) => resp.json())
             .then((json) => setData(json))
             .catch((error) => console.error(error))

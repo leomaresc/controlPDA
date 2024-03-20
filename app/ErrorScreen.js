@@ -48,7 +48,7 @@ export default function ErrorScreen({ route, navigation }){
     })
 
     const updateData = () => {
-        fetch(`http://10.101.46.136:3000/getErrorsByDate?fecha=${selected}`)
+        fetch(`https://calm-scarcely-hedgehog.ngrok-free.app/getErrorsByDate?fecha=${selected}`)
             .then((resp) => resp.json())
             .then((json) => setData(json))
             .catch((error) => console.error(error))
@@ -109,6 +109,17 @@ export default function ErrorScreen({ route, navigation }){
                                         text: 'Aceptar',
                                         onPress: () => {
                                             console.log(x.id)
+                                            fetch(`https://calm-scarcely-hedgehog.ngrok-free.app/deleteError`, {
+                                                method: 'DELETE',
+                                                headers: {
+                                                    Accept: 'application/json',
+                                                    'Content-type': 'application/json',
+                                                },
+                                                body: JSON.stringify({
+                                                    id: x.id
+                                                }),
+                                            })
+                                            .then(() => {updateData();})
                                         },
                                         style: "default",
                                     }
@@ -131,7 +142,40 @@ export default function ErrorScreen({ route, navigation }){
                             } else{
                                 alert("Sin observaciones.")
                             }
-                        }}>
+                        }} onLongPress={() => {
+                            Alert.alert(
+                                'Borrar error',
+                                '¿Seguro que desea borrar este error?',
+                                [
+                                    {
+                                        text: 'Cancelar',
+                                        onPress: () => {
+                                            console.log("Cancelar")
+                                        },
+                                        style: "cancel",
+                                    },
+                                    {
+                                        text: 'Aceptar',
+                                        onPress: () => {
+                                            console.log(x.id)
+                                            fetch(`https://calm-scarcely-hedgehog.ngrok-free.app/deleteError`, {
+                                                method: 'DELETE',
+                                                headers: {
+                                                    Accept: 'application/json',
+                                                    'Content-type': 'application/json',
+                                                },
+                                                body: JSON.stringify({
+                                                    id: x.id
+                                                }),
+                                            })
+                                            .then(() => {updateData();})
+                                        },
+                                        style: "default",
+                                    }
+                                ]
+                            )
+                        }
+                        }>
                             <View style={styles.error}>
                                 <Text style={styles.ruta}>{x.ruta}</Text>
                                 <Text style={styles.nombre}>{x.nombre}</Text>

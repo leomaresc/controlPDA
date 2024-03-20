@@ -82,7 +82,7 @@ export default function Login({ updateLoggedInStatus }) {
                 <Button color={"orange"} title="Registrarse" onPress={() => navigation.navigate('Register')} />
                 <Button color={"green"} title="Iniciar sesión" onPress={()=> {
                     handleSubmit(onSubmit)
-                    fetch(`http://10.101.46.136:3000/login`, {
+                    fetch(`https://calm-scarcely-hedgehog.ngrok-free.app/login`, {
                         method: 'POST',
                         headers: {
                             Accept: 'application/json',
