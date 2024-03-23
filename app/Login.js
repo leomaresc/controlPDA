@@ -1,111 +1,190 @@
-import { Text, View, TextInput, Button, Alert } from "react-native"
+import {
+  Text,
+  View,
+  TextInput,
+  Button,
+  Alert,
+  StyleSheet,
+  Image,
+} from "react-native";
 import { useEffect, useState, createContext } from "react";
-import { useForm, Controller } from "react-hook-form"
-import { useNavigation } from '@react-navigation/native';
+import { useForm, Controller } from "react-hook-form";
+import { useFonts } from "expo-font";
+import { useNavigation } from "@react-navigation/native";
 import App from "./App";
 
 let currentUser;
-export { currentUser }
+export { currentUser };
 
 export default function Login({ updateLoggedInStatus }) {
+  const navigation = useNavigation();
 
-    const navigation = useNavigation();
+  const [fontsLoaded] = useFonts({
+    'Quicksand_Regular': require('../assets/fonts/Quicksand-Regular.ttf'),
+  });
 
-    const handleLogin = () => {
-        currentUser = getValues("username")
-        console.log(currentUser)
-        updateLoggedInStatus(true); // Esto actualizará el estado en App.js
-        navigation.navigate('Home');
-      };
+  const handleLogin = () => {
+    currentUser = getValues("username");
+    console.log(currentUser);
+    updateLoggedInStatus(true); // Esto actualizará el estado en App.js
+    navigation.navigate("Home");
+  };
 
-    const {
-        control,
-        handleSubmit,
-        formState: { errors },
-        getValues,
-      } = useForm({
-        defaultValues: {
-          username: "",
-          password: "",
-        },
-      })
-    
-    const onSubmit = (data) => console.log(data)
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    getValues,
+  } = useForm({
+    defaultValues: {
+      username: "",
+      password: "",
+    },
+  });
 
-    return (
-        <View style={{flex: 1, flexDirection: "column", alignContent: "center"}}>
-            <View style={{flex: 0, height: "20%", justifyContent: "space-around"}}>
+  const onSubmit = (data) => console.log(data);
 
-            <View style={{flex: 0, flexDirection: "row"}}>
-            <Text>Usuario: </Text>
-            <Controller
+  const styles = StyleSheet.create({
+    body: {
+      flex: 1,
+      flexDirection: "column",
+      backgroundColor: "white",
+    },
+    bgImg: {
+      height: "20%",
+      width: "100%",
+    },
+    dataInput: {
+      width: "90%",
+      height: 450,
+      backgroundColor: "white",
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+      elevation: 5,
+      borderRadius: 10,
+      margin: 15,
+      flexDirection: "column",
+      alignItems: "center",
+    },
+    credentials: {
+      marginTop: 50,
+    },
+    inputBox: {
+      marginTop: 30,
+      width: 200,
+      height: 40,
+      borderWidth: 0.5,
+      borderColor: "black",
+      padding: 9,
+      fontFamily: "Quicksand_400Regular",
+      color: "#ffffff"
+    },
+    buttons: {
+        width: "40%",
+        flexDirection: "column",
+        marginTop: 30,
+    }
+  });
+
+  return (
+    <View style={styles.body}>
+      <View style={styles.bgImg}>
+        <Image
+          source={require("../assets/loginBg.jpg")}
+          style={{ height: 250 }}
+        />
+      </View>
+      <View>
+        <View style={styles.dataInput}>
+          <Text style={{marginTop: 10, marginRight: "55%", width: "40%", fontSize: 20, fontFamily: "Quicksand_400Regular"}}>Iniciar sesión</Text>
+          <View style={styles.credentials}>
+            <View>
+              <Controller
                 control={control}
                 rules={{
-                    required: true,
+                  required: true,
                 }}
                 render={({ field: { onChange, onBlur, value } }) => (
-                    <TextInput style={{borderWidth: 1, borderColor: "black", width: "70%"}}
-                        placeholder="Nombre de usuario"
-                        onBlur={onBlur}
-                        onChangeText={onChange}
-                        value={value}
-                    />
+                  <TextInput
+                    style={styles.inputBox}
+                    placeholder="Nombre de usuario"
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                  />
                 )}
                 name="username"
-            />
+              />
             </View>
 
             {errors.firstName && <Text>This is required.</Text>}
 
-            <View style={{flex: 0, flexDirection: "row"}}>
-            <Text>Contraseña: </Text>
-            <Controller
+            <View>
+              <Controller
                 control={control}
                 rules={{
-                    required: true,
+                  required: true,
                 }}
                 render={({ field: { onChange, onBlur, value } }) => (
-                    <TextInput style={{borderWidth: 1, borderColor: "black", width: "70%"}}
-                        placeholder="Contraseña"
-                        onBlur={onBlur}
-                        onChangeText={onChange}
-                        value={value}
-                    />
+                  <TextInput
+                    style={styles.inputBox}
+                    placeholder={"Contraseña"}
+                    onBlur={onBlur}
+                    onChangeText={onChange}
+                    value={value}
+                    secureTextEntry={true}
+                  />
                 )}
                 name="password"
+              />
+            </View>
+          </View>
+
+          <View style={styles.buttons}>
+            <View style={{marginBottom: 30}}>
+            <Button
+              color={"orange"}
+              title="Registrarse"
+              onPress={() => navigation.navigate("Register")}
             />
             </View>
-
-            </View>
-
-            <View style={{width: "80%",flex: 0, flexDirection: "row", justifyContent: "space-evenly", alignSelf: "center", margin: "10%"}}>
-                <Button color={"orange"} title="Registrarse" onPress={() => navigation.navigate('Register')} />
-                <Button color={"green"} title="Iniciar sesión" onPress={()=> {
-                    handleSubmit(onSubmit)
-                    fetch(`https://calm-scarcely-hedgehog.ngrok-free.app/login`, {
-                        method: 'POST',
-                        headers: {
-                            Accept: 'application/json',
-                            'Content-type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            username: getValues("username"),
-                            password: getValues("password")
-                        }),
-                    })
-                    .then(response => response.json())
-                    .then(json => {
-                        if(json = true){
-                            handleLogin();
-                        } else{
-                            console.log("A donde tú vas")
-                        }
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
-                }} />
-            </View>
+            <Button
+              color={"green"}
+              title="Iniciar sesión"
+              onPress={() => {
+                handleSubmit(onSubmit);
+                fetch(`https://calm-scarcely-hedgehog.ngrok-free.app/login`, {
+                  method: "POST",
+                  headers: {
+                    Accept: "application/json",
+                    "Content-type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    username: getValues("username"),
+                    password: getValues("password"),
+                  }),
+                })
+                  .then((response) => response.json())
+                  .then((json) => {
+                    if ((json = true)) {
+                      handleLogin();
+                    } else {
+                      console.log("A donde tú vas");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              }}
+            />
+          </View>
         </View>
-    )
+      </View>
+    </View>
+  );
 }

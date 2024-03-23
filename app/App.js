@@ -29,9 +29,9 @@ export default function App() {
           <Stack.Screen name="ErrorScreen" component={ErrorScreen} options={{title: 'Todos los errores'}} />
         </Stack.Group>
         ) : (
-        <Stack.Group>
+        <Stack.Group screenOptions={{headerShown: false}}>
             <Stack.Screen name="Login">
-              {(props) => <Login {...props} updateLoggedInStatus={updateLoggedInStatus} />}
+              {(props) => <Login {...props} updateLoggedInStatus={updateLoggedInStatus}/>}
             </Stack.Screen>
           <Stack.Screen name="Register" component={Register} />
         </Stack.Group>
