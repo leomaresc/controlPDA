@@ -24,6 +24,7 @@ export default function Button(props) {
             margin: 5,
         },
         buttonText: {
+            fontFamily: "Quicksand-Regular",
             textAlign: "center",
             color: props.textColor,
         }

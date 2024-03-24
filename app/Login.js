@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import { useEffect, useState, createContext } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { useFonts } from "expo-font";
 import { useNavigation } from "@react-navigation/native";
 import App from "./App";
 
@@ -18,10 +17,6 @@ export { currentUser };
 
 export default function Login({ updateLoggedInStatus }) {
   const navigation = useNavigation();
-
-  const [fontsLoaded] = useFonts({
-    'Quicksand_Regular': require('../assets/fonts/Quicksand-Regular.ttf'),
-  });
 
   const handleLogin = () => {
     currentUser = getValues("username");
@@ -81,13 +76,21 @@ export default function Login({ updateLoggedInStatus }) {
       borderWidth: 0.5,
       borderColor: "black",
       padding: 9,
-      fontFamily: "Quicksand_400Regular",
-      color: "#ffffff"
+      color: "#000000",
+      fontFamily: "Quicksand-Regular"
     },
     buttons: {
         width: "40%",
         flexDirection: "column",
         marginTop: 30,
+    },
+    footer: {
+      height: "auto",
+      alignItems: "center",
+      marginTop: 50,
+      opacity: 0.5,
+      fontFamily: "Quicksand-Regular",
+      fontSize: 12
     }
   });
 
@@ -101,7 +104,7 @@ export default function Login({ updateLoggedInStatus }) {
       </View>
       <View>
         <View style={styles.dataInput}>
-          <Text style={{marginTop: 10, marginRight: "55%", width: "40%", fontSize: 20, fontFamily: "Quicksand_400Regular"}}>Iniciar sesión</Text>
+          <Text style={{marginTop: 10, marginRight: "55%", width: "40%", fontSize: 20, fontFamily: "Quicksand-Regular"}}>Iniciar sesión</Text>
           <View style={styles.credentials}>
             <View>
               <Controller
@@ -183,6 +186,9 @@ export default function Login({ updateLoggedInStatus }) {
               }}
             />
           </View>
+        </View>
+        <View style={styles.footer}>
+              <Text style={styles.footer}>© Leomar Salazar 2023 - 2024</Text>
         </View>
       </View>
     </View>

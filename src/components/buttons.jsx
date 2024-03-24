@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, } from 'react-native';
+import { View } from 'react-native';
 import Button from './Button';
 import { useNavigation } from '@react-navigation/native';
 

@@ -34,7 +34,13 @@
       }
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      [
+      "expo-font",
+      {
+        "fonts": ["./assets/fonts/Quicksand-Regular.ttf"] 
+      }
+      ]
     ]
   }
 }
