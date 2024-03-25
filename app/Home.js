@@ -1,4 +1,4 @@
-import { View, Text} from "react-native"
+import { View, Text, ScrollView, ScrollViewComponent, StyleSheet} from "react-native"
 import { useState, useEffect } from "react"
 import { useIsFocused } from "@react-navigation/native";
 import Buttons from "../src/components/buttons"
@@ -36,14 +36,44 @@ export default function Home({route, navigate}){
         return result.length;
     }
 
+    const styles = StyleSheet.create({
+        body: {
+            flex: 5,
+            flexDirection: "column",
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            backgroundColor: "white",
+        },
+        shadowBox: {
+            borderRadius: 16,
+            backgroundColor: 'transparent',
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: 1,
+            },
+            shadowOpacity: 0.22,
+            shadowRadius: 2.22,
+            elevation: 3,
+        },
+        box: {
+            backgroundColor: '#fff',
+            borderRadius: 16,
+            overflow: 'hidden',
+        },
+    })
+
 
     return (
-        <View className="home" style={{ flex: 5,flexDirection: "column", alignItems: 'center', justifyContent: 'space-between', backgroundColor: "#A4B9DB"}}>
-            <View style={{marginTop: "10%"}}>
-            {grocers.map((x, index) => {
-                return <Grocer counter={counter(x.name)} key={x.key} index={index} name={x.name} />
-            })}
+        <View className="home" style={styles.body}>
+            <View style={styles.shadowBox}>
+                <ScrollView style={styles.box}>
+                    {grocers.map((x, index) => {
+                        return <Grocer counter={counter(x.name)} key={x.key} index={index} name={x.name} />
+                    })}
+                </ScrollView>
             </View>
+
             <Buttons />
         </View>
     )

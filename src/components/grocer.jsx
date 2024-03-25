@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 const styles = StyleSheet.create ({
     view: {
         width: 300,
-        marginTop: "5%",
+        marginBottom: "8%",
         flex: 0,
         flexDirection: "row",
         borderRadius: 10,
