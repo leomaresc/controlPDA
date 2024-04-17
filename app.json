@@ -1,6 +1,6 @@
 {
   "expo": {
-    "entryPoint": "./app/App.js",
+    "entryPoint": "./App.js",
     "name": "controlPDA",
     "slug": "controlPDA",
     "version": "0.0.1",

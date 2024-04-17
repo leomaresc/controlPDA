@@ -10,7 +10,7 @@ import {
 import { useEffect, useState, createContext } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
-import App from "./App";
+import App from "../App";
 
 let currentUser;
 export { currentUser };

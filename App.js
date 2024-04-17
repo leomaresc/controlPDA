@@ -1,19 +1,14 @@
 import { NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'; 'expo-router/build/fork/getPathFromState';
-import Login from './Login';
-import Home from './Home';
-import AddError from './AddError';
-import ErrorScreen from './ErrorScreen';
-import Register from './Register';
+import Login from './app/Login';
+import Home from './app/Home';
+import AddError from './app/AddError';
+import ErrorScreen from './app/ErrorScreen';
+import Register from './app/Register';
 import { useContext, useState } from 'react';
-import { useFonts } from 'expo-font';
 
 const Stack = createNativeStackNavigator();
 export default function App() {
-
-  const [isLoaded] = useFonts({
-    "Quicksand-Regular" : require("../assets/fonts/Quicksand-Regular.ttf")
-  })
 
   const [isLoggedIn, setLoggedIn] = useState(false);
 
