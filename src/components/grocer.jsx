@@ -5,12 +5,12 @@ import { useNavigation } from '@react-navigation/native';
 
 const styles = StyleSheet.create ({
     view: {
-        width: 300,
-        marginBottom: "8%",
+        width: "95%",
+        height: 40,
         flex: 0,
         flexDirection: "row",
         borderRadius: 10,
-        backgroundColor: "#FFFFF5",
+        backgroundColor: "white",
         shadowColor: "#000",
         shadowOffset: {
 	        width: 0,
@@ -18,7 +18,7 @@ const styles = StyleSheet.create ({
         },
         shadowOpacity: 0.22,
         shadowRadius: 2.22,
-        elevation: 3,
+        elevation: 1,
         alignItems: "center"
     },
     text: {

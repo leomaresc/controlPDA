@@ -4,8 +4,6 @@ import Button from '../src/components/Button'
 import { Calendar } from 'react-native-calendars';
 import getCurrentDate from '../utils/getCurrentDate';
 
-// TODO: Agregar opción de borrar un error. Creo que hay que crear un nuevo endpoint con la api que permita borrar según el ID (El id se recibe por cada elemento de error creado.)
-
 export default function ErrorScreen({ route, navigation }){
 
     const [data, setData] = useState([]);
@@ -138,7 +136,11 @@ export default function ErrorScreen({ route, navigation }){
                     return (
                         <TouchableHighlight onPress={()=> {
                             if(x.observacion != ""){
-                                alert(x.observacion)
+                                Alert.alert(
+                                    `Error en ruta número: ${x.ruta}`,
+                                    `Supervisor: ${x.supervisor}\n\nTipo de error: ${x.error}\n\nObservación: ${x.observacion}`
+                                )
+/*                                 alert(x.observacion) */
                             } else{
                                 alert("Sin observaciones.")
                             }

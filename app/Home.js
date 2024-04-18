@@ -42,37 +42,33 @@ export default function Home({route, navigate}){
             flexDirection: "column",
             alignItems: 'center',
             justifyContent: 'space-between',
-            backgroundColor: "white",
-        },
-        shadowBox: {
-            borderRadius: 16,
-            backgroundColor: 'transparent',
-            shadowColor: '#000',
-            shadowOffset: {
-              width: 0,
-              height: 1,
-            },
-            shadowOpacity: 0.22,
-            shadowRadius: 2.22,
-            elevation: 3,
+            backgroundColor: "#dae2f0",
         },
         box: {
+            flexDirection: "column",
+            alignContent: "center",
+            justifyContent: "space-evenly",
+            alignItems: "center",
+            marginTop: "15%",
+            width: "90%",
+            height: "80%",
+            borderWidth: 0,
+            borderColor: "black",
             backgroundColor: '#fff',
             borderRadius: 16,
             overflow: 'hidden',
+            elevation: 5,
         },
     })
 
 
     return (
         <View className="home" style={styles.body}>
-            <View style={styles.shadowBox}>
-                <ScrollView style={styles.box}>
+                <View style={styles.box}>
                     {grocers.map((x, index) => {
                         return <Grocer counter={counter(x.name)} key={x.key} index={index} name={x.name} />
                     })}
-                </ScrollView>
-            </View>
+                </View>
 
             <Buttons />
         </View>

@@ -77,7 +77,6 @@ export default function Login({ updateLoggedInStatus }) {
       borderColor: "black",
       padding: 9,
       color: "#000000",
-      fontFamily: "Quicksand-Regular"
     },
     buttons: {
         width: "40%",
@@ -89,7 +88,6 @@ export default function Login({ updateLoggedInStatus }) {
       alignItems: "center",
       marginTop: 50,
       opacity: 0.5,
-      fontFamily: "Quicksand-Regular",
       fontSize: 12
     }
   });
@@ -104,7 +102,7 @@ export default function Login({ updateLoggedInStatus }) {
       </View>
       <View>
         <View style={styles.dataInput}>
-          <Text style={{marginTop: 10, marginRight: "55%", width: "40%", fontSize: 20, fontFamily: "Quicksand-Regular"}}>Iniciar sesión</Text>
+          <Text style={{marginTop: 10, marginRight: "55%", width: "40%", fontSize: 20}}>Iniciar sesión</Text>
           <View style={styles.credentials}>
             <View>
               <Controller
