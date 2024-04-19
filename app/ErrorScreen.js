@@ -87,7 +87,10 @@ export default function ErrorScreen({ route, navigation }){
                     return (
                         <TouchableHighlight onPress={()=> {
                             if(x.observacion != ""){
-                                alert(x.observacion)
+                                Alert.alert(
+                                    `Error en ruta número: ${x.ruta}`,
+                                    `Supervisor: ${x.supervisor}\n\nTipo de error: ${x.error}\n\nObservación: ${x.observacion}`
+                                )
                             } else{
                                 alert("Sin observaciones.")
                             }
@@ -140,7 +143,6 @@ export default function ErrorScreen({ route, navigation }){
                                     `Error en ruta número: ${x.ruta}`,
                                     `Supervisor: ${x.supervisor}\n\nTipo de error: ${x.error}\n\nObservación: ${x.observacion}`
                                 )
-/*                                 alert(x.observacion) */
                             } else{
                                 alert("Sin observaciones.")
                             }

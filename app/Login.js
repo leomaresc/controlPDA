@@ -22,7 +22,6 @@ export default function Login({ updateLoggedInStatus }) {
     currentUser = getValues("username");
     console.log(currentUser);
     updateLoggedInStatus(true); // Esto actualizará el estado en App.js
-    navigation.navigate("Home");
   };
 
   const {
