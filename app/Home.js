@@ -3,7 +3,6 @@ import { useState, useEffect } from "react"
 import { useIsFocused } from "@react-navigation/native";
 import Buttons from "../src/components/buttons"
 import Grocer from "../src/components/grocer"
-import grocers from "../grocers"
 import getCurrentDate from "../utils/getCurrentDate"
 
 export default function Home({route, navigate}){
@@ -11,6 +10,7 @@ export default function Home({route, navigate}){
 
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [grocers, setGrocers] = useState([]);
 
     const isFocused = useIsFocused();
 
@@ -22,12 +22,20 @@ export default function Home({route, navigate}){
             .finally(() => setLoading(false));
     }
 
+    const updateGrocers = () => {
+        fetch(`https://calm-scarcely-hedgehog.ngrok-free.app/getGrocers`)
+            .then((resp) => resp.json())
+            .then((json) => setGrocers(json))
+            .catch((error) => console.error(error))
+            .finally(() => setLoading(false));
+    }
 
     useEffect(() => {
         console.log("called")
         // Call only when screen open or when back on screen 
         if(isFocused){ 
             updateData();
+            updateGrocers();
         }
     }, [ isFocused]);
 

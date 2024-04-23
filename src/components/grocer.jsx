@@ -1,5 +1,4 @@
 import { View, Text, StyleSheet } from "react-native";
-import grocers from "../../grocers";
 import Button from "./Button";
 import { useNavigation } from '@react-navigation/native';
 
@@ -40,7 +39,6 @@ const styles = StyleSheet.create ({
     }
 });
 
-const test = grocers;
 
 const Grocer = props => {
     const navigation = useNavigation();
@@ -55,5 +53,4 @@ const Grocer = props => {
     );
 };
 
-export {test}
 export default Grocer;
