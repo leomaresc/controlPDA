@@ -147,11 +147,6 @@ export default function Login({ updateLoggedInStatus }) {
 
           <View style={styles.buttons}>
             <View style={{marginBottom: 30}}>
-            <Button
-              color={"orange"}
-              title="Registrarse"
-              onPress={() => navigation.navigate("Register")}
-            />
             </View>
             <Button
               color={"green"}

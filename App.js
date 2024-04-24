@@ -6,7 +6,7 @@ import Home from './app/Home';
 import AddError from './app/AddError';
 import ErrorScreen from './app/ErrorScreen';
 import Register from './app/Register';
-import RouteCounter from './app/RouteCounter';
+import GrocersKPI from './app/GrocersKPI';
 import { useContext, useState } from 'react';
 
 const Stack = createNativeStackNavigator();
@@ -17,7 +17,7 @@ function HomeTabs() {
     <Tab.Navigator>
       <Tab.Screen name="Home" component={Home} options={{headerShown: false }} />
       <Tab.Screen name="ErrorScreen" component={ErrorScreen} options={{title: 'Todos los errores'}} initialParams={{name: "Todos los bodegueros"}}/>
-      <Tab.Screen name="RouteCounter" component={RouteCounter} options={{headerShown: false}} />
+      <Tab.Screen name="GrocersKPI" component={GrocersKPI} options={{headerShown: false}} />
     </Tab.Navigator>
   );
 }

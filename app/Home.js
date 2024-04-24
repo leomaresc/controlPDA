@@ -50,7 +50,6 @@ export default function Home({route, navigate}){
             flexDirection: "column",
             alignItems: 'center',
             justifyContent: 'space-between',
-            backgroundColor: "#dae2f0",
         },
         box: {
             flexDirection: "column",
